@@ -1,6 +1,17 @@
 @tailwind base;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Switzer-Regular';
+  src: url('fonts/Switzer-Regular.ttf') format('truetype');
+}
+
+@layer base {
+  html,body {
+    font-family: 'Switzer-Regular';
+  }
+}
+
 .brand-base {
   background-color: #e6e0fc61 
 }
