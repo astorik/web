@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 function Nav() {
   return (
@@ -11,16 +11,28 @@ function Nav() {
   );
 }
 
-async function App() {
-  // todo: figure how to make async requests work
-  let userData = await fetch("http://localhost:8000/v0/user/hello@turtledev.in");
+function App() {
+  let [userData, setUserData] = useState({});
+
+  // load userdata
+  useEffect(() => {
+    async function load() {
+      let userData = await fetch("http://localhost:8000/v0/user/hello@turtledev.in");
+      if (userData.ok) {
+        let data = await userData.json();
+        setUserData(data);
+      }
+    }
+    load();
+  }, []);
+
   return (
-    <React.Fragment>
-      <Nav></Nav>
-      <div className="container">
-        <p>text</p>
-      </div>
-    </React.Fragment>
+    <div>
+        <Nav></Nav>
+        <div className="container">
+          <p>{userData.Name}</p>
+        </div>
+    </div>
   )
 }
 
