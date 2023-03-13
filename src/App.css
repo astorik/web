@@ -1,5 +1,6 @@
 @tailwind base;
 @tailwind utilities;
+@tailwind components;
 
 @font-face {
   font-family: 'Switzer-Regular';
@@ -14,4 +15,10 @@
 
 .brand-base {
   background-color: #e6e0fc61 
+}
+
+@layer components {
+  .btn-primary {
+    @apply py-4 px-6 bg-black text-white font-semibold text-xl shadow-md rounded-md;
+  }
 }
