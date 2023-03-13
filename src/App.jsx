@@ -38,7 +38,7 @@ function Preferences({user}) {
       <div className="container pt-10 mb-10">
         {preferenceCentres}
       </div>
-      <div className="w-screen flex justify-content-center">
+      <div className="container flex justify-center">
         <button className="py-4 px-6 bg-black text-white font-semibold text-xl shadow-md rounded-md">UPDATE</button>
       </div>
     </div>
