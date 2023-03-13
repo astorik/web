@@ -21,4 +21,7 @@
   .btn-primary {
     @apply py-4 px-6 bg-black text-white font-semibold text-xl shadow-md rounded-md;
   }
+  .btn-primary-inverted {
+    @apply py-4 px-6 border-2 border-black text-black font-semibold text-xl shadow-md rounded-md;
+  }
 }

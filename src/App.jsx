@@ -89,7 +89,10 @@ function Home() {
       <div className="p-6 flex flex-col items-center">
         <pre className="text-xs md:text-base">{hammerTime}</pre>
         <h1 className="text-2xl font-light">Work In Progress</h1>
-        <Link to="/preferences" className="btn-primary mt-20">Click here for demo</Link>
+        <div className="container flex flex-col md:flex-row text-center md:text-left justify-center gap-4 mt-20">
+          <a className="btn-primary-inverted" href="https://astorik.com">Know More</a>
+          <Link to="/preferences" className="btn-primary">Preference Center Demo</Link>
+        </div>
       </div>
     </div>
   )
