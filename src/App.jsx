@@ -97,7 +97,7 @@ function Home() {
 
 const hammerTime =`
 T                                    \\\`.    T
-|    T     .--------------.___________) \   |    T
+|    T     .--------------.___________) \\   |    T
 !    |     |//////////////|___________[ ]   !  T |
      !     \`--------------'           ) (      | !
                                   mn  '-'      !
@@ -108,7 +108,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <Nav/>,
     errorElement: <ErrorPage/>,
-    children: [,
+    children: [
       {
         path: "/",
         element: <Home/>
