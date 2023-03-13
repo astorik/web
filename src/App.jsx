@@ -87,7 +87,7 @@ function Home() {
   return (
     <div>
       <div className="p-6 flex flex-col items-center">
-        <div className="font-mono text-xl whitespace-pre">{hammerTime}</div>
+        <pre>{hammerTime}</pre>
         <h1 className="text-2xl font-light">Work In Progress</h1>
         <Link to="/preferences" className="btn-primary mt-20">Click here for demo</Link>
       </div>
