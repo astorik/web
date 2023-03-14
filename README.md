@@ -7,4 +7,4 @@ The Audience Relationship platform for Privacy aware individuals & organsiations
 
 visit [astorik.com](https://astorik.com) to know more.
 
-development snapshot availabe [here](https://astorik.github.io/web)
+development snapshot available [here](https://astorik.github.io/web)
