@@ -1,29 +1,38 @@
 import './App.css';
-import React, {useEffect, useState} from 'react';
-import { createBrowserRouter, useRouteError, Outlet, Link } from 'react-router-dom';
+import React from 'react';
+import { createBrowserRouter, useRouteError, Outlet, Link, useLoaderData, useNavigation } from 'react-router-dom';
 
-function Nav({email}) {
+function Nav({ email }) {
+  const navigation = useNavigation();
   return (
-    <div className="">
+    <div className="min-h-screen">
       <div className="flex justify-between items-center w-screen bg-purple-100 h-24 px-8 py-10">
         <Link to="/" className="text-4xl font-semibold tracking-tight scale-y-90">astorik</Link>
         <p>{email}</p>
       </div>
       <div className="main">
-        <Outlet/>
+        {
+          navigation.state === "loading" ?
+            <div className="flex flex-col container mx-auto my-72">
+              <p className="text-center text-xl">loading ...</p>
+              <span className="loader container mx-auto"></span>
+            </div>
+            :
+            <Outlet />
+        }
       </div>
     </div>
   );
 }
 
-function Preferences({user}) {
+function Preferences({ user }) {
   let orgs = user.Orgs ?? [];
   let preferenceCentres = orgs.map(org => {
     return (
       <div className="container" key={org.Name}>
         <p className="text-4xl font-bold mb-4">{org.Name}</p>
-        {org.Preferences.map(pref => 
-          <div className="container p-2 ml-10 flex">
+        {org.Preferences.map(pref =>
+          <div key={pref.Name} className="container p-2 ml-10 flex">
             <input type="checkbox" className="mx-4" name="" id="" />
             <div>
               <p className="text-3xl">{pref.Name}</p>
@@ -49,22 +58,10 @@ function Preferences({user}) {
 }
 
 function App() {
-  const [userData, setUserData] = useState({});
-
-  useEffect(() => {
-    (async function loadUserData() {
-      // todo: move this to a separate interface; 
-      // todo: architect user-id parsing
-      let userData = await fetch("http://localhost:8000/v0/user/hello@turtledev.in");
-      if (userData.ok) {
-        setUserData(await userData.json());
-      }
-    })();
-  }, []);
-  
+  const userData = useLoaderData();
   return (
     <div>
-        <Preferences user={userData}/>
+      <Preferences user={userData} />
     </div>
   );
 }
@@ -91,14 +88,14 @@ function Home() {
         <h1 className="text-2xl font-light">Work In Progress</h1>
         <div className="container flex flex-col md:flex-row text-center md:text-left justify-center gap-4 mt-20">
           <a className="btn-primary-inverted" href="https://astorik.com">Know More</a>
-          <Link to="/preferences" className="btn-primary">Preference Center Demo</Link>
+          <Link to={"/preferences/" + encodeURIComponent("hello@turtledev.in")} className="btn-primary">Preference Center Demo</Link>
         </div>
       </div>
     </div>
   )
 }
 
-const hammerTime =`
+const hammerTime = `
 T                                    \\\`.    T
 |    T     .--------------.___________) \\   |    T
 !    |     |//////////////|___________[ ]   !  T |
@@ -109,18 +106,32 @@ T                                    \\\`.    T
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Nav/>,
-    errorElement: <ErrorPage/>,
+    element: <Nav />,
+    errorElement: <ErrorPage />,
     children: [
       {
-        path: "/",
-        element: <Home/>
-      },
-      {
-        path: "/preferences",
-        element: <App/>
+        errorElement: <ErrorPage />,
+        children: [
+          {
+            index: true,
+            element: <Home />
+          },
+          {
+            path: "/preferences/:userId",
+            element: <App />,
+            loader: async ({ params }) => {
+              const { userId } = params;
+              const url = `http://localhost:8000/v0/user/${encodeURIComponent(userId)}`
+              const userData = await fetch(url);
+              if (userData.ok) {
+                return userData.json();
+              }
+              throw Error(`failed to fetch data for user ${userId}`);
+            },
+          }
+        ]
       }
-    ],
+    ]
   }
 ], {
   basename: "/web"

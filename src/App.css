@@ -25,3 +25,35 @@
     @apply py-4 px-6 border-2 border-black text-black font-semibold text-xl shadow-md rounded-md;
   }
 }
+
+.loader{
+  display: block;
+  position: relative;
+  height: 12px;
+  width:  33%;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.loader::after {
+  content: '';
+  width: 40%;
+  height: 100%;
+  background: rgba(128, 0, 128, 0.6);
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  animation: animloader 2s linear infinite;
+}
+
+@keyframes animloader {
+  0% {
+    left: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    left: 100%;
+    transform: translateX(0%);
+  }
+}
