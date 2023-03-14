@@ -32,7 +32,7 @@ function Preferences({ user }) {
       <div className="container" key={org.Name}>
         <p className="text-4xl font-bold mb-4">{org.Name}</p>
         {org.Preferences.map(pref =>
-          <div key={pref.Name} className="container p-2 ml-10 flex">
+          <div key={pref.Name} className="container p-2 flex">
             <input type="checkbox" className="mx-4" name="" id="" />
             <div>
               <p className="text-3xl">{pref.Name}</p>
@@ -47,7 +47,7 @@ function Preferences({ user }) {
     <div className="mx-auto max-w-screen-md py-12">
       <p className="text-5xl py-2">Welcome {user.Name}!</p>
       <p className="text-lg px-2 tracking-wide">View/update your preferences below</p>
-      <div className="container pt-10 mb-10">
+      <div className="container my-10">
         {preferenceCentres}
       </div>
       <div className="container flex justify-center">
