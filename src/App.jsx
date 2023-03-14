@@ -44,7 +44,7 @@ function Preferences({ user }) {
     );
   })
   return (
-    <div className="container mx-auto max-w-screen-md py-12">
+    <div className="mx-auto max-w-screen-md py-12">
       <p className="text-5xl py-2">Welcome {user.Name}!</p>
       <p className="text-lg px-2 tracking-wide">View/update your preferences below</p>
       <div className="container pt-10 mb-10">
